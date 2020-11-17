@@ -4,12 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-class Tree
+public class Tree
 {
-    public GameObject textObject;
-    public TMP_Text text;
-    public int level;
-    public int count;
+    private GameObject textObject;
+    private TMP_Text text;
+    private int level;
+    private int count;
+
+    public int Level => level;
+    public int Count => count;
+    public GameObject TextObject => textObject;
 
     public Tree(GameObject textObj, string nameParent, int level) {
         textObj.transform.SetParent(GameObject.Find(nameParent).transform);
@@ -27,16 +31,19 @@ class Tree
         count++;
         text.text = $"Lvl: {level} - {count}";
     }
+    
 }
 
 public class TreeCounterManager : MonoBehaviour
 {
     public static TreeCounterManager instance = null;
 
-    [SerializeField] private GameObject textObject;
-    [SerializeField] private GameObject parentForText;
+    [SerializeField] private GameObject textObject = null;
+    [SerializeField] private GameObject parentForText = null;
 
     private List<Tree> _trees = null;
+
+    public List<Tree> Trees => _trees;
 
     private void Start()
     {
@@ -48,13 +55,21 @@ public class TreeCounterManager : MonoBehaviour
     {
         for(int i = 0, end = _trees.Count; i < end; ++i)
         {
-            if (_trees[i].level == level) { 
+            if (_trees[i].Level == level) { 
                 _trees[i].Increment();
                 return;
             }
         }
 
         _trees.Add(new Tree(Instantiate(textObject), parentForText.name, level));
+    }
 
+    public void RemoveTree()
+    {
+        foreach(Tree tree in _trees)
+        {
+            Destroy(tree.TextObject);
+        }
+        _trees.Clear();
     }
 }
