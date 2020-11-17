@@ -5,27 +5,40 @@ using UnityEngine;
 
 public class TreeController : MonoBehaviour
 {
-    [SerializeField] private float maxHealth = 5;
+    [SerializeField] private float maxHealth = 1;
     [SerializeField] private GameObject[] partsTree = null;
-
-    private float health;
+    
+    [SerializeField] private int _level = 1;
+    private float _health;
 
     private void Start()
     {
-        health = maxHealth;
+        SetLevel(_level);
+        _health = maxHealth;
     }
 
     public void Hit(float damage)
     {
-        Debug.Log($"Tree: {gameObject.name}. Health: {health}");
-        health -= damage;
+        Debug.Log($"Tree: {gameObject.name}. _health: {_health}");
+        _health -= damage;
 
-        if (health <= 0) { Destroy(gameObject); }
-
-        for (float i = 0.0f, end = 1 - (health / maxHealth); i < end;  i += 0.2f)
-        {
-            partsTree[(int)(i * 5)].SetActive(false);
+        if (_health <= 0)
+        { 
+            Destroy(gameObject);
+            TreeCounterManager.instance.AddTree(_level);
         }
+
+
+        for (float i = 0f, end = (1 - (_health / maxHealth)) * partsTree.Length - 1; i < end;  i += 1f)
+        {
+            partsTree[(int)i].SetActive(false);
+        }
+    }
+
+    public void SetLevel(int level)
+    {
+        _level = level;
+        maxHealth *= Mathf.Pow(_level, 1.5f);
     }
 
 }
