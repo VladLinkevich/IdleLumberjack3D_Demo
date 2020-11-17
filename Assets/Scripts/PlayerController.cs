@@ -8,6 +8,7 @@ using DG.Tweening;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 6f;
+    [SerializeField] private float lengthOfHit = 1.5f;
 
     private CharacterController _charController;
     private Animator _animator;
@@ -27,16 +28,32 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        _animator.SetFloat("Speed", Mathf.Abs(_charController.velocity.z + _charController.velocity.x));
+        Vector3 velocity = _charController.velocity;
+        _animator.SetFloat("Speed", Mathf.Abs(velocity.z + velocity.x));
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        {
+            Collider[] trees = Physics.OverlapSphere(transform.position, lengthOfHit, 1 << LayerMask.NameToLayer("Tree"));
+            if (trees.Length > 0) { _animator.SetTrigger("Melee"); }
+        }
+        
         _charController.Move(Vector3.zero);
     }
 
     #endregion
-   
+
     private void Move(Vector3 mov)
     {
         _charController.Move(mov * moveSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, Mathf.Atan2(mov.x, mov.z) * Mathf.Rad2Deg, 0);
+    }
+
+    public void Hit()
+    {
+        Collider[] trees = Physics.OverlapSphere(transform.position, lengthOfHit, 1 << LayerMask.NameToLayer("Tree"));
+        foreach (Collider tree in trees)
+        {
+            tree.GetComponent<TreeController>()?.Hit(1);
+        }
     }
 
 }
