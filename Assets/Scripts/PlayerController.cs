@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
         Collider[] trees = Physics.OverlapSphere(transform.position, lengthOfHit, 1 << LayerMask.NameToLayer("Tree"));
         foreach (Collider tree in trees)
         {
-            tree.GetComponent<TreeController>()?.Hit(1);
+            tree.GetComponent<TreeController>()?.Hit(AxeManager.instance.Damage);
         }
     }
 

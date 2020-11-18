@@ -31,6 +31,22 @@ public class CoinManager : MonoBehaviour
         TreeCounterManager.instance.RemoveTree();
     }
 
+    public bool BuySomething(decimal coin)
+    {
+        if (_coins >= coin) 
+        { 
+            _coins -= coin;
+            SetTextUI();
+            return true;
+        } else { return false; }
+    }
+
+    public bool CheckYourCoin(decimal coin)
+    {
+        if (_coins >= coin) { return true; }
+        else { return false; }
+    }
+
     private void SetTextUI()
     {
         if (_coins / 1000000000 >= 1) { textCoin.text = string.Format("Coin: {0:0.0} B", _coins / 1000000000);  }
