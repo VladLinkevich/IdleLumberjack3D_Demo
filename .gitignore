@@ -2,8 +2,7 @@
 # Unity folders and files
 ###
 [Aa]ssets/AssetStoreTools*
-[Bb]uild/
-*.apk
+
 [Ll]ibrary/
 [Ll]ocal[Cc]ache/
 [Oo]bj/
@@ -40,3 +39,5 @@ sysinfo.txt
 Icon?
 ehthumbs.db
 Thumbs.db
+
+!/Build/Build.apk
