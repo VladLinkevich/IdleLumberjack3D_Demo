@@ -24,11 +24,17 @@ public class CoinManager : MonoBehaviour
 
         foreach(Tree tree in trees)
         {
-            _coins += CoinLevel(tree.Level) * tree.Count * 1000;
+            _coins += CoinLevel(tree.Level) * tree.Count;
         }
 
         SetTextUI();
         TreeCounterManager.instance.RemoveTree();
+    }
+
+    public void AddCoin(decimal coin)
+    {
+        _coins += coin;
+        SetTextUI();
     }
 
     public bool BuySomething(decimal coin)

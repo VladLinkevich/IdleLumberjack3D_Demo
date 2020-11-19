@@ -7,6 +7,7 @@ public class TreeController : MonoBehaviour
 {
     [SerializeField] private float maxHealth = 1;
     [SerializeField] private GameObject[] partsTree = null;
+    [SerializeField] private ParticleSystem effect = null;
     
     [SerializeField] private int _level = 1;
     private float _health;
@@ -23,8 +24,9 @@ public class TreeController : MonoBehaviour
 
     public void Hit(float damage)
     {
-        Debug.Log($"Tree: {gameObject.name}. _health: {_health}");
         _health -= damage;
+
+        if (SettingManager.inctance.Effect) { effect.Play(); }
 
         if (_health <= 0)
         {
@@ -36,7 +38,6 @@ public class TreeController : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
-
 
         for (int i = 0, end = (int)((1 - (_health / maxHealth)) * partsTree.Length); i < end;  i ++)
         {

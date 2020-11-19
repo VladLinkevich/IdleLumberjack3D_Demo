@@ -38,7 +38,7 @@ public class MapManager : MonoBehaviour
 
         foreach (GameObject obj in homeObjects)
         {
-            obj.transform.Translate(new Vector3(0, 0, lenghtLevel));
+            obj.transform.position += new Vector3(0, 0, lenghtLevel);
         }
 
         foreach (GameObject tree in forest)
