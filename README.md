@@ -3,7 +3,7 @@
 ____
 
 
-.apk Build click ![here](./Build)
+.apk Build click [here](./Build)
 
 ____
 
