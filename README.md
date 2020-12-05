@@ -11,7 +11,7 @@ ____
 
 * WASD - Move
 
-lab2 - https://docs.google.com/document/d/1gTWhnWg0Ue7IVFlBD4PgtzD0VYhzrrHrhAPm1uvUqeQ/edit# <br\>
-lab3 - https://docs.google.com/document/d/1ilZA3AFZ0YaoDmjMqBSaap-X4IF6nvzDxJELmtZvt2Y/edit
+lab2 - [click here](https://docs.google.com/document/d/1gTWhnWg0Ue7IVFlBD4PgtzD0VYhzrrHrhAPm1uvUqeQ/edit#) <br>
+lab3 - [click here](https://docs.google.com/document/d/1ilZA3AFZ0YaoDmjMqBSaap-X4IF6nvzDxJELmtZvt2Y/edit)
 
  
